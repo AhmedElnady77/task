@@ -11,12 +11,14 @@ class NewsController extends Controller
 
     public function index(Request $request)
     {
+
         $search = $request->input('search');
 
-        $news = News::when($search, function ($query, $search) {
+        $news = News::with('categories')->when($search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%')
                          ->orWhere('description', 'like', '%' . $search . '%');
         })->paginate(3);
+
 
         return view('admin.news.index', compact('news', 'search'));
 

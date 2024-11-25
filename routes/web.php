@@ -36,14 +36,13 @@ Route::resource('news',NewsController::class)->middleware(['auth',AdminMiddlewar
 
 route::get('/view/{id}',[ViewController::class,'index'])->name('view.news');
 Route::get('/show/{id}', [ShowNewsController::class, 'show'])->name('news.show');
+route::get('user_page',[HomeController::class,'user'])->name('user.page');
+route::get('home_page',[HomeController::class,'home'])->name('home.page');
+
 
 require __DIR__.'/auth.php';
 
-// route::get('users/{id}',function($id){
-// $user= User::findorfail($id);
-// dd($user);
 
-// });
-Route::get('user/login',function(){
-    return 'user/login';
-});
+
+
+

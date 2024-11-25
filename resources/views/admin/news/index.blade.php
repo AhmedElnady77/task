@@ -51,6 +51,7 @@
                                     <th>#</th>
                                     <th>New Name</th>
                                     <th>Description</th>
+                                    <th>Category Name</th>
                                     <th>Body</th>
                                     <th>Actions</th>
                                 </tr>
@@ -68,6 +69,13 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $new->name }}</td>
                                         <td>{{ strip_tags($new->description) }}</td>
+                                        <td>
+                                            @forelse($new->categories as $category)
+                                                <span>{{ $category->name }}</span>{{ !$loop->last ? ', ' : '' }}
+                                            @empty
+                                                <span>No Category</span>
+                                            @endforelse
+                                        </td>
                                         <td>{{ $new->body }}</td>
                                         <td>
                                             <a href="{{ route('news.edit', $new->id) }}" class="btn btn-warning btn-sm">Edit</a>

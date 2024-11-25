@@ -16,6 +16,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{route('home.page')}}">Home</a>
+                          </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categories
@@ -31,7 +34,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <!-- زر تسجيل الخروج -->
+
                     <form method="POST" action="{{ route('logout') }}" class="d-flex">
                         @csrf
                         <button type="submit" class="btn btn-danger">Logout</button>

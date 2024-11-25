@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>News Category</title>
+    <title>Home page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
   </head>
@@ -49,29 +49,16 @@
     </div>
 
 
-    <div class="container mt-2">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-primary">News</h1>
 
-        <h1 class="text-center mb-4 text-primary">{{ $cat->name }}</h1>
 
-        @if($cat->children->isNotEmpty())
-        <div class="card text-center mb-5">
-            <h4>Subcategories</h4>
-            <ul class="list-inline mt-3">
-                @foreach($cat->children as $child)
-                    <li class="list-inline-item">
-                        <a href="{{ route('view.news', ['id' => $child->id]) }}" class="btn btn-secondary btn-sm">
-                            {{ $child->name }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-        @if($n_news->isEmpty())
-            <p class="text-center text-muted mb-5">No news available in this category.</p>
+
+        @if($show_news->isEmpty())
+            <p class="text-center text-muted">No news available in this category.</p>
         @else
-            <div class="row g-4 mb-5"> 
-                @foreach($n_news as $news)
+            <div class="row g-4">
+                @foreach($show_news as $news)
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body d-flex flex-column">
@@ -85,11 +72,10 @@
             </div>
 
             <div class="mt-4">
-                {{ $n_news->links() }}
+                {{ $show_news->links() }}
             </div>
         @endif
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

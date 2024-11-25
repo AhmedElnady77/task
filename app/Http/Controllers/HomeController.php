@@ -17,12 +17,24 @@ class HomeController extends Controller
             if ($usertype == 'admin') {
                 return view('dashboard');
             } else {
-                $categories=Category::all();
-                // $news=News::all();
-                return view('user.user',compact('categories'));
+                
+                return redirect(route('home.page'));
             }
         } else {
             return redirect('/login');
         }
     }
+
+    public function home(){
+        $show_news = News::paginate(6);
+        $categories=Category::whereNull('parent_id')->get();
+        return view('user.home', compact('show_news', 'categories'));
+    }
+
+    public function user(){
+        $categories=Category::all();
+        return view('user.user', compact('categories'));
+    }
+
+
 }

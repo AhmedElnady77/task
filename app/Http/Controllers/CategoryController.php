@@ -18,15 +18,13 @@ class CategoryController extends Controller
 
         $categories = Category::when($search, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
-        })->paginate(3);
+        })->paginate(5);
 
         $news = News::all();
 
         return view('admin.categories.index', compact('categories', 'news', 'search'));
     }
-    // $cat = NewsCategory::find(5);
-    // $news = $cat->news;
-    // dd($news);
+
 
     /**
      * Show the form for creating a new resource.
@@ -74,9 +72,6 @@ class CategoryController extends Controller
     {
        $tags= $Category->news;
        $categories = Category::all();
-
-
-
         return view('admin.categories.edit', compact('Category', 'tags','categories'));
     }
 
@@ -92,23 +87,7 @@ class CategoryController extends Controller
             'parent_id' => $request->input('categories'),
 
         ]);
-        // $newsCategory->update($request->except('news'));
-
-        // $news= explode(',',$request->post('news'));
-        // $new_ids=[];
-        // foreach($news as $n_new){
-
-        //     $slug=str::slug($n_new);
-        //     $new=News::where('slug',$slug)->first();
-        //     if(!$new){
-        //         $new=News::create([
-        //             'name'=>$n_new,
-        //             'slug'=>$slug,
-        //         ]);
-        //     }
-        //     $new_ids[]=$new->id;
-        //     $newsCategory->news()->sync($new_ids);
-        // }
+       
         session()->flash('Edit', 'category updated successfully');
         return redirect()->route('categories.index');
     }
